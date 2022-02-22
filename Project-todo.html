@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        flex-wrap: wrap;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .list-area {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 500px;
+        height: 500px;
+        border: 2px solid black;
+        background-color: peachpuff;
+        overflow-y: scroll;
+      }
+      .input-for-submit {
+        border: 2px olivedrab solid;
+        height: 35px;
+        width: 100%;
+        margin-top: 12px;
+        border-radius: 10px;
+      }
+
+      .list-area-input {
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        width: 90%;
+      }
+      .submit {
+        display: flex;
+        justify-content: center;
+        height: 30px;
+        text-align: center;
+        align-items: center;
+        margin-top: 15px;
+      }
+
+      .list-area-films {
+        display: flex;
+        justify-content: center;
+        height: 300px;
+        width: 400px;
+        overflow-y: scroll;
+      }
+      .film-list-name {
+        border: 2px olivedrab solid;
+        display: flex;
+        height: 35px;
+        width: 250px;
+        margin-top: 12px;
+        border-radius: 10px;
+        font-size: 20px;
+        padding: 0 10px 0 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .film-list-remove {
+        display: flex;
+        justify-content: center;
+        height: 30px;
+        text-align: center;
+        align-items: center;
+        margin-top: 15px;
+
+        background-color: rgba(255, 255, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="list-area">
+        <div class="list-area-input">
+          <input
+            value="Your film"
+            class="input-for-submit"
+            type="text"
+          /><button class="submit">Sumbit</button>
+        </div>
+        <div class="list-area-films">
+          <p class="film-list-name">Это ваш первый фильм</p>
+
+          <button class="film-list-remove">Remove</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let filmNameInput = document.querySelector(".input-for-submit");
+    const addBtn = document.querySelector(".submit");
+    const filmNamePlace = document.querySelector(".list-area-films");
+    let i = 1;
+    let deleteBtn = document.querySelectorAll(".film-list-remove");
+
+    filmNamePlace.addEventListener("click", function (e) {
+      let btn = e.target;
+      if (btn.classList == "film-list-remove") {
+        e.target.previousElementSibling.remove();
+        e.target.remove();
+      }
+    });
+
+    let filmAddFn = function () {
+      let filmName = filmNameInput.value;
+      if (filmName == "Your film") {
+        return alert("Please input your film name Correctly");
+      }
+      filmNamePlace.insertAdjacentHTML(
+        "beforeend",
+        `<p class="film-list-name">${i}: ${filmName}</p> 
+        <button class="film-list-remove">Remove</button>`
+      );
+      console.log(filmName);
+      i++;
+    };
+
+    addBtn.addEventListener("click", filmAddFn);
+  </script>
+</html>
